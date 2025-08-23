@@ -1,10 +1,11 @@
 import type { RouteObject } from "react-router";
 import { paths } from "./paths";
+import { DashboardPage } from "~/components/pages/DashboardPage";
 
 export const ROUTES: RouteObject[] = [
   {
     path: paths.DASHBOARD,
-    element: <h1>Home page</h1>,
+    element: <DashboardPage />,
   },
   {
     path: paths.USER,

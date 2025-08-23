@@ -1,11 +1,12 @@
 import { Link, generatePath } from "react-router";
 import { paths } from "~/router/paths";
+import { Box } from "@mui/material";
 
 export const Header = () => {
   return (
-    <header>
-      <h1>Cool header</h1>
-      <nav>
+    <Box component="header">
+      <Box component="h2">User management</Box>
+      <Box component="nav">
         <Link to={paths.DASHBOARD}>Dashboard</Link>
         <Link
           to={generatePath(paths.USER, {
@@ -14,7 +15,7 @@ export const Header = () => {
         >
           Go to random user
         </Link>
-      </nav>
-    </header>
+      </Box>
+    </Box>
   );
 };
