@@ -8,7 +8,7 @@ export const Header = () => {
       <Container>
         <Toolbar sx={{ display: "flex" }}>
           <Typography variant="h6" component="h6">
-            User management
+            Manage users
           </Typography>
 
           <Button

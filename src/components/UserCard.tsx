@@ -15,6 +15,8 @@ type Props = {
   user: User;
 };
 
+export const USER_CARD_LIST_HEIGHT = 80;
+
 export const UserCard: FC<Props> = ({ user }) => {
   const { avatarUrl, firstName, email, id } = user;
 
@@ -30,6 +32,7 @@ export const UserCard: FC<Props> = ({ user }) => {
         width: 300,
         borderRadius: 2,
         boxShadow: 3,
+        height: `${USER_CARD_LIST_HEIGHT}px`,
       }}
     >
       <CardActionArea onClick={handleCardClick}>

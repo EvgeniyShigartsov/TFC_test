@@ -3,6 +3,7 @@ import { Header } from "~/components/Header";
 import { useStore } from "./providers/store/useStore";
 import { useEffect } from "react";
 import { api } from "./api/api";
+import { Box } from "@mui/material";
 
 const App = () => {
   const store = useStore();
@@ -11,13 +12,11 @@ const App = () => {
     api.getUsers().then((users) => store.setUsers(users));
   }, [store]);
 
-  console.log("render app");
-
   return (
-    <>
+    <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
       <Header />
       <AppRouter />
-    </>
+    </Box>
   );
 };
 
