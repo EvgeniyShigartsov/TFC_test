@@ -1,21 +1,27 @@
-import { Link, generatePath } from "react-router";
+import { Link } from "react-router";
 import { paths } from "~/router/paths";
-import { Box } from "@mui/material";
+import { AppBar, Toolbar, Typography, Button, Container } from "@mui/material";
 
 export const Header = () => {
   return (
-    <Box component="header">
-      <Box component="h2">User management</Box>
-      <Box component="nav">
-        <Link to={paths.DASHBOARD}>Dashboard</Link>
-        <Link
-          to={generatePath(paths.USER, {
-            id: Math.floor(Math.random() * 100 + 1),
-          })}
-        >
-          Go to random user
-        </Link>
-      </Box>
-    </Box>
+    <AppBar position="static">
+      <Container>
+        <Toolbar sx={{ display: "flex" }}>
+          <Typography variant="h6" component="h6">
+            User management
+          </Typography>
+
+          <Button
+            component={Link}
+            to={paths.DASHBOARD}
+            size="small"
+            variant="contained"
+            sx={{ backgroundColor: "white", color: "black", ml: 2 }}
+          >
+            Dashboard
+          </Button>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 };

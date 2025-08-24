@@ -1,6 +1,7 @@
 import type { RouteObject } from "react-router";
 import { paths } from "./paths";
 import { DashboardPage } from "~/components/pages/DashboardPage";
+import { UserPage } from "~/components/pages/UserPage";
 
 export const ROUTES: RouteObject[] = [
   {
@@ -9,7 +10,7 @@ export const ROUTES: RouteObject[] = [
   },
   {
     path: paths.USER,
-    element: <h2>User page</h2>,
+    element: <UserPage />,
   },
   {
     path: paths.NOT_FOUND,
