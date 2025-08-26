@@ -28,7 +28,10 @@ export const UserList: FC<Props> = ({ users, listHeight }) => {
   const virtualItems = virtualizer.getVirtualItems();
 
   return (
-    <Box ref={listRef} sx={{ height: `${listHeight}px`, overflow: "auto" }}>
+    <Box
+      ref={listRef}
+      sx={{ height: `${listHeight}px`, maxHeight: "100%", overflow: "auto" }}
+    >
       <Box
         sx={{ height: `${totalHeight}px`, width: "100%", position: "relative" }}
       >

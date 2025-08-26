@@ -8,7 +8,7 @@ export const DashboardPage: FC = observer(() => {
   const store = useStore();
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const [listHeight, setListHeight] = useState<number>(800);
+  const [listHeight, setListHeight] = useState<number>(0);
 
   useLayoutEffect(() => {
     const onResize = () => {
