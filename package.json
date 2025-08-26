@@ -15,6 +15,7 @@
     "@mui/material": "^7.3.1",
     "@tanstack/react-virtual": "^3.13.12",
     "axios": "^1.11.0",
+    "lodash": "^4.17.21",
     "mobx": "^6.13.7",
     "mobx-react-lite": "^4.1.0",
     "react": "^19.1.1",
@@ -23,6 +24,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@types/lodash": "^4.17.20",
     "@types/node": "^24.3.0",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",

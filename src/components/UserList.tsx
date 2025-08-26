@@ -1,7 +1,8 @@
 import { Box } from "@mui/material";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { useRef, type FC } from "react";
+import { useMemo, useRef, type FC } from "react";
 import { USER_CARD_LIST_HEIGHT, UserCard } from "~/components/UserCard";
+import _ from "lodash";
 
 type Props = {
   users: User[];
@@ -9,15 +10,18 @@ type Props = {
 };
 
 const gap = 8;
+const columns = 3;
 
 export const UserList: FC<Props> = ({ users, listHeight }) => {
   const listRef = useRef<HTMLDivElement>(null);
 
+  const userChunks = useMemo(() => _.chunk(users, columns), [users]);
+
   const virtualizer = useVirtualizer({
-    count: users.length,
+    count: userChunks.length,
     getScrollElement: () => listRef.current,
     estimateSize: () => USER_CARD_LIST_HEIGHT + gap,
-    overscan: 20,
+    overscan: 10,
   });
 
   const totalHeight = virtualizer.getTotalSize();
@@ -29,7 +33,7 @@ export const UserList: FC<Props> = ({ users, listHeight }) => {
         sx={{ height: `${totalHeight}px`, width: "100%", position: "relative" }}
       >
         {virtualItems.map((virtualItem) => {
-          const user = users[virtualItem.index];
+          const rowUsers = userChunks[virtualItem.index];
 
           return (
             <Box
@@ -41,9 +45,13 @@ export const UserList: FC<Props> = ({ users, listHeight }) => {
                 width: "100%",
                 height: `${virtualItem.size}px`,
                 transform: `translateY(${virtualItem.start}px)`,
+                display: "flex",
+                justifyContent: "space-between",
               }}
             >
-              <UserCard user={user} />
+              {rowUsers.map((user) => (
+                <UserCard key={user.id} user={user} />
+              ))}
             </Box>
           );
         })}
