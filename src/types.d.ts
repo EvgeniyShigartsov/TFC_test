@@ -1,3 +1,5 @@
+type Gender = "Male" | "Female" | "Fluid" | "Other";
+
 type User = {
   id: number;
   age: number;
@@ -5,11 +7,20 @@ type User = {
   firstName: string;
   lastName: string;
   email: string;
-  gender: "Male" | "Female" | "Fluid" | "Other";
+  gender: Gender;
   country: string;
   city: string;
   state: string;
   postCode: string;
   street: string;
   streetNumber: string;
+};
+
+type UserFilters = {
+  age?: {
+    min?: number;
+    max?: number;
+  };
+  gender?: Gender;
+  textField?: string;
 };

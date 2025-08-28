@@ -8,10 +8,16 @@ import {
   FormControl,
   Slider,
 } from "@mui/material";
-import { useState } from "react";
+import { observer } from "mobx-react-lite";
+import { useStore } from "~/providers/store/useStore";
 
-export const Filters = () => {
-  const [ageRange, setAgeRange] = useState<[number, number]>([18, 50]);
+const genderOptions: Gender[] = ["Female", "Male", "Fluid", "Other"];
+
+export const Filters = observer(() => {
+  const store = useStore();
+
+  const ageFrom = store.filters?.age?.min ?? store.userMinMaxAge.min;
+  const ageTo = store.filters?.age?.max ?? store.userMinMaxAge.max;
 
   return (
     <Box
@@ -23,27 +29,33 @@ export const Filters = () => {
     >
       <Box sx={{ minWidth: "250px" }}>
         <Typography variant="subtitle1" color="textPrimary">
-          Age from {ageRange[0]} to {ageRange[1]}
+          Age from {ageFrom} to {ageTo}
         </Typography>
         <Slider
-          value={ageRange}
-          onChange={(_, [min, max]) => setAgeRange([min, max])}
-          min={18}
-          max={50}
+          value={[ageFrom, ageTo]}
+          onChange={(_, [min, max]) => store.updateFilters("age", { min, max })}
+          min={store.userMinMaxAge.min}
+          max={store.userMinMaxAge.max}
         />
       </Box>
 
       <FormControl size="small" sx={{ minWidth: "200px" }}>
-        <InputLabel>Sex</InputLabel>
-        <Select label="Стать" defaultValue="">
-          <MenuItem value="male">Чоловіча</MenuItem>
-          <MenuItem value="female">Жіноча</MenuItem>
-          <MenuItem value="other">Інша</MenuItem>
+        <InputLabel>Gender</InputLabel>
+        <Select
+          label="Gender"
+          defaultValue=""
+          onChange={(e) => store.updateFilters("gender", e.target.value)}
+        >
+          {genderOptions.map((gender) => (
+            <MenuItem value={gender} key={gender}>
+              {gender}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
 
       <TextField
-        onChange={(e) => console.log(e.target.value)}
+        onChange={(e) => store.updateFilters("textField", e.target.value)}
         label="Search in card"
         type="text"
         size="small"
@@ -51,4 +63,4 @@ export const Filters = () => {
       />
     </Box>
   );
-};
+});

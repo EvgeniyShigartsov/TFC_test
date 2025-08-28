@@ -25,7 +25,7 @@ export const DashboardPage: FC = observer(() => {
 
   return (
     <Container ref={containerRef} sx={{ flex: 1 }}>
-      <UserList users={store.users} listHeight={listHeight} />
+      <UserList users={store.filteredUsers} listHeight={listHeight} />
     </Container>
   );
 });
