@@ -2,16 +2,16 @@ import {
   Typography,
   Box,
   TextField,
-  Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
   Slider,
+  Autocomplete,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import { useCallback, useMemo, useState } from "react";
 import { useStore } from "~/providers/store/useStore";
 import _ from "lodash";
+import ClearIcon from "@mui/icons-material/Clear";
 
 const genderOptions: Gender[] = ["Female", "Male", "Fluid", "Other"];
 
@@ -23,7 +23,7 @@ export const Filters = observer(() => {
       min: store.filters?.age?.min ?? store.userMinMaxAge.min,
       max: store.filters?.age?.max ?? store.userMinMaxAge.max,
     },
-    gender: store.filters?.gender,
+    genders: store.filters?.genders,
     textField: store.filters?.textField,
   });
 
@@ -51,7 +51,7 @@ export const Filters = observer(() => {
         gap: 3,
       }}
     >
-      <Box sx={{ minWidth: "250px" }}>
+      <Box sx={{ minWidth: "170px" }}>
         <Typography variant="subtitle1" color="textPrimary">
           Age from {ageFrom} to {ageTo}
         </Typography>
@@ -63,27 +63,37 @@ export const Filters = observer(() => {
         />
       </Box>
 
-      <FormControl size="small" sx={{ minWidth: "200px" }}>
-        <InputLabel>Gender</InputLabel>
-        <Select
-          label="Gender"
-          defaultValue=""
-          onChange={(e) => handleUpdateFilters("gender", e.target.value)}
-        >
-          {genderOptions.map((gender) => (
-            <MenuItem value={gender} key={gender}>
-              {gender}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <Autocomplete
+        size="small"
+        options={genderOptions}
+        renderInput={(params) => <TextField {...params} label="Gender" />}
+        onChange={(_, genders) => handleUpdateFilters("genders", genders)}
+        sx={{ minWidth: "300px" }}
+        multiple
+      />
 
       <TextField
         onChange={(e) => handleUpdateFilters("textField", e.target.value)}
+        value={localFilters.textField ?? ""}
         label="Search in card"
         type="text"
         size="small"
         sx={{ minWidth: "300px" }}
+        slotProps={{
+          input: {
+            endAdornment: (
+              <InputAdornment position="end">
+                {localFilters.textField && (
+                  <IconButton
+                    onClick={() => handleUpdateFilters("textField", "")}
+                  >
+                    <ClearIcon />
+                  </IconButton>
+                )}
+              </InputAdornment>
+            ),
+          },
+        }}
       />
     </Box>
   );

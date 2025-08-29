@@ -9,9 +9,9 @@ export class Store {
 
     makeObservable(this, {
       users: observable,
-      filteredUsers: computed,
       filters: observable,
       userMinMaxAge: observable,
+      filteredUsers: computed,
       setUsers: action,
       updateFilters: action,
     });
@@ -25,7 +25,7 @@ export class Store {
     console.time("filter takes");
     if (!this.filters) return this.users;
 
-    const { age, gender, textField } = this.filters;
+    const { age, genders, textField } = this.filters;
     const textFieldLowercase = textField ? textField.toLowerCase() : "";
 
     const res = this.users.filter((user) => {
@@ -40,7 +40,8 @@ export class Store {
 
       const matchAgeMin = age?.min ? user.age >= age.min : true;
       const matchAgeMax = age?.max ? user.age <= age.max : true;
-      const matchGender = gender ? user.gender === gender : true;
+      const matchGender =
+        genders && genders?.length > 0 ? genders!.includes(user.gender) : true;
       const matchBySearch = textFieldLowercase
         ? userTextFields.toLowerCase().includes(textFieldLowercase)
         : true;

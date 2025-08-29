@@ -21,6 +21,6 @@ type UserFilters = {
     min?: number;
     max?: number;
   };
-  gender?: Gender;
+  genders?: Gender[];
   textField?: string;
 };
