@@ -22,7 +22,6 @@ export class Store {
   public userMinMaxAge: { min: number; max: number };
 
   public get filteredUsers(): User[] {
-    console.time("filter takes");
     if (!this.filters) return this.users;
 
     const { age, genders, textField } = this.filters;
@@ -49,7 +48,6 @@ export class Store {
       return matchAgeMin && matchAgeMax && matchGender && matchBySearch;
     });
 
-    console.timeEnd("filter takes");
     return res;
   }
 
