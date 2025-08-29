@@ -1,9 +1,13 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { paths } from "~/router/paths";
 import { AppBar, Toolbar, Typography, Button, Container } from "@mui/material";
 import { Filters } from "./Filters";
 
 export const Header = () => {
+  const location = useLocation();
+
+  const showFilters = location.pathname === paths.DASHBOARD;
+
   return (
     <AppBar
       position="static"
@@ -28,7 +32,7 @@ export const Header = () => {
             Dashboard
           </Button>
         </Toolbar>
-        <Filters />
+        {showFilters && <Filters />}
       </Container>
     </AppBar>
   );
