@@ -1,7 +1,8 @@
 import type { RouteObject } from "react-router";
 import { paths } from "./paths";
-import { DashboardPage } from "~/components/pages/DashboardPage";
-import { UserPage } from "~/components/pages/UserPage";
+import { DashboardPage } from "~/pages/DashboardPage";
+import { UserPage } from "~/pages/UserPage";
+import { NotFoundPage } from "~/pages/NotFoundPage";
 
 export const ROUTES: RouteObject[] = [
   {
@@ -14,6 +15,6 @@ export const ROUTES: RouteObject[] = [
   },
   {
     path: paths.NOT_FOUND,
-    element: <h1>Not found page</h1>,
+    element: <NotFoundPage />,
   },
 ];
