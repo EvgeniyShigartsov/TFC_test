@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { useMemo, useRef, type FC } from "react";
-import { USER_CARD_LIST_HEIGHT, UserCard } from "~/components/UserCard";
+import { USER_CARD_LIST_HEIGHT, UserListItem } from "~/components/UserListItem";
 import _ from "lodash";
 
 type Props = {
@@ -53,7 +53,7 @@ export const UserList: FC<Props> = ({ users, listHeight }) => {
               }}
             >
               {rowUsers.map((user) => (
-                <UserCard key={user.id} user={user} />
+                <UserListItem key={user.id} user={user} />
               ))}
             </Box>
           );

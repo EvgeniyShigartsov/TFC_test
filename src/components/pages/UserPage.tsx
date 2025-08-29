@@ -1,9 +1,10 @@
-import { Container } from "@mui/material";
+import { type FC, useMemo } from "react";
 import { observer } from "mobx-react-lite";
-import { useMemo, type FC } from "react";
 import { useParams, Navigate } from "react-router";
 import { useStore } from "~/providers/store/useStore";
 import { paths } from "~/router/paths";
+import { Container } from "@mui/material";
+import { UserCard } from "~/components/UserCard";
 
 export const UserPage: FC = observer(() => {
   const params = useParams();
@@ -20,5 +21,9 @@ export const UserPage: FC = observer(() => {
     return <Navigate to={paths.DASHBOARD} replace />;
   }
 
-  return <Container>{user.firstName}</Container>;
+  return (
+    <Container>
+      <UserCard user={user} />
+    </Container>
+  );
 });
