@@ -1,12 +1,22 @@
-import { Link, useLocation } from "react-router";
+import type { FC } from "react";
+import { useLocation, useNavigate } from "react-router";
 import { paths } from "~/router/paths";
 import { AppBar, Toolbar, Typography, Button, Container } from "@mui/material";
 import { Filters } from "./Filters";
+import { useParams } from "react-router";
 
-export const Header = () => {
+export const Header: FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const params = useParams();
+
+  const userId = Number(params.id);
 
   const showFilters = location.pathname === paths.DASHBOARD;
+
+  const handleDashboardClick = () => {
+    navigate(paths.DASHBOARD, { state: { userId } });
+  };
 
   return (
     <AppBar
@@ -23,8 +33,7 @@ export const Header = () => {
           </Typography>
 
           <Button
-            component={Link}
-            to={paths.DASHBOARD}
+            onClick={handleDashboardClick}
             size="small"
             variant="contained"
             sx={{ ml: 2 }}

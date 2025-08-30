@@ -7,6 +7,7 @@ import _ from "lodash";
 type Props = {
   users: User[];
   listHeight: number;
+  scrollToUser?: number;
 };
 
 const gap = 8;
